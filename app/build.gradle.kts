@@ -32,12 +32,16 @@ android {
     }
 
     compileOptions {
-        // Java ve Kotlin jvm hedefini uyumlu hâle getiriyoruz
+        // Java ve Kotlin JVM hedefini uyumlu hâle getiriyoruz
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
     }
     kotlinOptions {
         jvmTarget = "17"
+    }
+
+    buildFeatures {
+        viewBinding = true
     }
 }
 

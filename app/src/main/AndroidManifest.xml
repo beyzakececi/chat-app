@@ -2,6 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
+
     <application
         android:name=".ChatApp"
         android:allowBackup="true"
@@ -11,8 +14,9 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.ChatApp"
+        android:theme="@style/Base.Theme.BlaBlaChat"
         tools:targetApi="31">
+
 
         <!-- Uygulama başlatıldığında önce LoginActivity açılır -->
         <activity
@@ -33,3 +37,4 @@
 
     </application>
 </manifest>
+
