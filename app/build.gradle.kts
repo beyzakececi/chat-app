@@ -1,6 +1,7 @@
 plugins {
     id("com.android.application")
     kotlin("android")
+    id("com.google.devtools.ksp")             // <<< KSP eklentisini burada version belirtmeden sadece “id” olarak ekliyoruz
     id("com.google.gms.google-services")
 }
 
@@ -32,44 +33,26 @@ android {
     }
 
     compileOptions {
-        // Java ve Kotlin JVM hedefini uyumlu hâle getiriyoruz
+        // Derleme hedefi Java 17 kalacak
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
     }
     kotlinOptions {
         jvmTarget = "17"
     }
-
-    buildFeatures {
-        viewBinding = true
-    }
 }
 
 dependencies {
     // ==================================================
-    // 1) BOM Tanımı: Tüm Firebase kütüphanelerinin uyumlu sürümünü buradan alacağız
+    // 1) Firebase (BOM)
     // ==================================================
     implementation(platform("com.google.firebase:firebase-bom:32.3.1"))
-
-    // ==================================================
-    // 2) Firebase Bağımlılıkları
-    // --------------------------------------------------
-    // – Burada ayrı ayrı sürüm numarası yazmıyoruz; BOM bunları otomatik belirliyor.
-    // ==================================================
-
-    // Firebase Authentication (versiyon BOM’dan geliyor)
     implementation("com.google.firebase:firebase-auth-ktx")
-
-    // Firebase Firestore (versiyon BOM’dan geliyor)
     implementation("com.google.firebase:firebase-firestore-ktx")
-
-    // Firebase App Check Debug Provider
-    // (Bu satır aynı zamanda interop paketini de getirir,
-    // böylece `InternalAppCheckTokenProvider` sınıfı projenize dahil olur.)
     implementation("com.google.firebase:firebase-appcheck-debug")
 
     // ==================================================
-    // 3) AndroidX ve Diğer Kütüphaneler
+    // 2) AndroidX + UI
     // ==================================================
     implementation("androidx.core:core-ktx:1.10.1")
     implementation("androidx.appcompat:appcompat:1.6.1")
@@ -78,7 +61,34 @@ dependencies {
     implementation("androidx.recyclerview:recyclerview:1.3.0")
 
     // ==================================================
-    // 4) Test Bağımlılıkları
+    // 3) Room (KSP üzerinden)
+    // ==================================================
+    implementation("androidx.room:room-runtime:2.5.2")
+    implementation("androidx.room:room-ktx:2.5.2")
+    ksp("androidx.room:room-compiler:2.5.2")      // <<< “ksp” kullanıyoruz; kapt değil
+
+    // ==================================================
+    // 4) Retrofit, OkHttp + JSON
+    // ==================================================
+    implementation("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
+    implementation("com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.10")
+
+    // ==================================================
+    // 5) Coroutines
+    // ==================================================
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
+
+    // ==================================================
+    // 6) Diğer Kütüphaneler (örnek: SDP/SSP, RoundedImageView)
+    // ==================================================
+    implementation("com.intuit.sdp:sdp-android:1.0.6")
+    implementation("com.intuit.ssp:ssp-android:1.0.6")
+    implementation("com.makeramen:roundedimageview:2.3.0")
+
+    // ==================================================
+    // 7) Test Kütüphaneleri
     // ==================================================
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
