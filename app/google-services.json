@@ -42,25 +42,6 @@
           "other_platform_oauth_client": []
         }
       }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:974962830030:android:a04e75d351ed8a9c0c3e9f",
-        "android_client_info": {
-          "package_name": "com.company.chatApp"
-        }
-      },
-      "oauth_client": [],
-      "api_key": [
-        {
-          "current_key": "AIzaSyAz_PpUGONPSbdqnuNYYUv8w6Iym7KWSHk"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": []
-        }
-      }
     }
   ],
   "configuration_version": "1"
